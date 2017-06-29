@@ -12,7 +12,7 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate
     {
   
-        var tennisBall = SKShapeNode()
+    var tennisBall = SKShapeNode()
     var tennisRacket = SKSpriteNode()
     var tennisRacketTwo = SKSpriteNode()
     var loseZone = SKSpriteNode()
