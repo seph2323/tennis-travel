@@ -202,6 +202,7 @@
 				TargetAttributes = {
 					20EC1ADE1F0553E9001EEDEB = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = R74NPTK23H;
 						ProvisioningStyle = Automatic;
 					};
 					20EC1AF81F0553E9001EEDEB = {
@@ -426,6 +427,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R74NPTK23H;
 				INFOPLIST_FILE = "Tennis Travel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "whatever.Tennis-Travel";
@@ -438,6 +440,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R74NPTK23H;
 				INFOPLIST_FILE = "Tennis Travel/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "whatever.Tennis-Travel";
@@ -519,6 +522,7 @@
 				20EC1B0F1F0553E9001EEDEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		20EC1B101F0553E9001EEDEB /* Build configuration list for PBXNativeTarget "Tennis TravelTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +531,7 @@
 				20EC1B121F0553E9001EEDEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		20EC1B131F0553E9001EEDEB /* Build configuration list for PBXNativeTarget "Tennis TravelUITests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +540,7 @@
 				20EC1B151F0553E9001EEDEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
