@@ -13,32 +13,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
   
     var tennisBall = SKShapeNode()
-    var tennisRacket = SKSpriteNode()
-    var tennisRacketTwo = SKSpriteNode()
+    var tennisRacket1 = SKSpriteNode()
+    var tennisRacket2 = SKSpriteNode()
     var loseZone = SKSpriteNode()
     var score: Int = 0
    var  numberOfLives: Int = 0
-    
     override func didMove(to view: SKView)
-        {
+    {
         physicsWorld.contactDelegate = self
-            self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        
             
-            
-            createBackground()
-            makeTennisBall()
-            makeRacket1()
-            makeRacket2()
-            makeNet()
-            makeGreenRight()
-            makeGreenLeft()
+//           createBackground()
+//            makeTennisBall()
+//            makeRacket1()
+//            makeRacket2()
+//            makeNet()
+//            makeGreenRight()
+//            makeGreenLeft()
+//            makeGreenRight2()
+//            makeGreenLeft2()
+//            makeloseZone()
     }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            tennisRacket.position.x = location.x
+            tennisRacket1.position.x = location.x
             tennisBall.physicsBody?.isDynamic = true
             tennisBall.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 5))
         }
@@ -46,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
             for touch in touches {
                 let location = touch.location(in: self)
-                tennisRacket.position.x = location.x
+                tennisRacket2.position.x = location.x
             }
         }
         
@@ -55,20 +58,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             let bodyAName = contact.bodyA.node?.name
             let bodyBName = contact.bodyB.node?.name
             
-            // If two items colide, make the brick disappear and add 1 to your score
-            
-            if bodyAName == "tennisBall" && bodyBName == "greenRight"|| bodyAName == "greenLeft"&&bodyBName == "Tennis Ball" {
-                 if bodyAName == "Net" {
-                    contact.bodyA.node?.action(forKey: "Redo")
-                    score --1 {
-                               else if bodyBName == "greenRight" ||  bodyBName == "greenLeft" {
+            if bodyAName == "tennisBall" && bodyBName == "greenRight1" || bodyAName == "greenLeft1" && bodyBName == "tennisBall"{
+                 if bodyAName == "greenRight2" && bodyBName == "tennisBall" || bodyAName == "tennisBall" && bodyBName == "greenLeft2" {
+                    contact.bodyA.node?.removeFromParent()
+                     score += 1
+                } else if bodyBName == "loseZone" {
                     contact.bodyB.node?.removeFromParent()
-                                score += 5 {
-
-                        
-                    
-
-                            }
+                    score -= 1
+                }
+                
+            }
             
 
                 if contact.bodyA.node?.name == "loseZone" ||
@@ -83,7 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 }
             }
 
-            override func update(currentTime: TimeInterval) {
+            func update(currentTime: TimeInterval) {
                 if (score == 60) {
                     print( "You totally won, dude!!!!\nYou Totally scored all", score,  "Points!!!!!!!")
                     self.view?.isPaused = true
@@ -91,12 +90,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             }
     
             func createBackground() {
-                let tenniscourt = SKTexture(imageNamed: "Tennis Court")
+                let tennisCourt = SKTexture(imageNamed: "tennis court")
                 for i in 0...1 {
-                    let tennisCourtBackground = SKSpriteNode(texture: tennis court)
+                    let tennisCourtBackground = SKSpriteNode(texture: tennisCourt)
                     tennisCourtBackground.zPosition = -1
                     tennisCourtBackground.position = CGPoint(x: 0, y: tennisCourtBackground.size.height * CGFloat(i))
-                    addChild(starsBackground)
+                    addChild(tennisCourtBackground)
                     let moveDown = SKAction.moveBy(x: 0, y: -tennisCourtBackground.size.height, duration: 20)
                     let moveReset = SKAction.moveBy(x:0, y: tennisCourtBackground.size.height, duration: 0)
                     let moveLoop = SKAction.sequence([moveDown, moveReset])
@@ -106,44 +105,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             }
 
           func   makeTennisBall() {
-                ball = SKShapeNode(circleOfRadius: 10)
-                ball.position = CGPoint(x: frame.midX, y: frame.midY)
-                ball.strokeColor = UIColor.black
-                ball.fillColor = UIColor.yellow
-                ball.name = "tennisBall"
-                ball.physicsBody = SKPhysicsBody(circleOfRadius: 10)
-                ball.physicsBody?.isDynamic = false//ignores all forces and impulses
-                ball.physicsBody?.usesPreciseCollisionDetection = true
-                ball.physicsBody?.friction = 0
-                ball.physicsBody?.affectedByGravity = false
-                ball.physicsBody?.restitution = 1
-                ball.physicsBody?.linearDamping = 0
-                ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
+                tennisBall = SKShapeNode(circleOfRadius: 10)
+                tennisBall.position = CGPoint(x: frame.midX, y: frame.midY)
+                tennisBall.strokeColor = UIColor.white
+                tennisBall.fillColor = UIColor.green
+                tennisBall.name = "tennisBall"
+                tennisBall.physicsBody = SKPhysicsBody(circleOfRadius: 10)
+                tennisBall.physicsBody?.isDynamic = false//ignores all forces and impulses
+                tennisBall.physicsBody?.usesPreciseCollisionDetection = true
+                tennisBall.physicsBody?.friction = 0
+                tennisBall.physicsBody?.affectedByGravity = false
+                tennisBall.physicsBody?.restitution = 1
+                tennisBall.physicsBody?.linearDamping = 0
+                tennisBall.physicsBody?.contactTestBitMask = (tennisBall.physicsBody?.collisionBitMask)!
                 
-                addChild(ball)
+                addChild(tennisBall)
 
             }
     
             func makeRacket1() {
-                tennisRacket = SKSpriteNode(color: UIColor.white, size: CGSize(width: frame.width/4, height: 20))
-                tennisRacket.position = CGPoint(x: frame.midX, y: frame.minY + 125)
-                tennisRacket.name = "tennisRacket1"
-                tennisRacket.physicsBody = SKPhysicsBody(rectangleOf: tennisRacket.size)
-                tennisRacket.physicsBody?.isDynamic = false
-                addChild(tennisRacket)
+                tennisRacket1 = SKSpriteNode(color: UIColor.green, size: CGSize(width: frame.width/4, height: 20))
+                tennisRacket1.position = CGPoint(x: frame.midX, y: frame.minY + 125)
+                tennisRacket1.name = "tennisRacket1"
+                tennisRacket1.physicsBody = SKPhysicsBody(rectangleOf: tennisRacket1.size)
+                tennisRacket1.physicsBody?.isDynamic = false
+                addChild(tennisRacket1)
             }
             
             func makeRacket2() {
-                tennisRacket = SKSpriteNode(color: UIColor.white, size: CGSize(width: frame.width/4, height: 20))
-                tennisRacket.position = CGPoint(x: frame.minX, y: frame.midY + 125)
-                tennisRacket.name = "tennisRacket2"
-                tennisRacket.physicsBody = SKPhysicsBody(rectangleOf: tennisRacket.size)
-                tennisRacket.physicsBody?.isDynamic = false
-                addChild(tennisRacket)
+                tennisRacket2 = SKSpriteNode(color: UIColor.blue, size: CGSize(width: frame.width/4, height: 20))
+                tennisRacket2.position = CGPoint(x: frame.minX, y: frame.midY + 125)
+                tennisRacket2.name = "tennisRacket2"
+                tennisRacket2.physicsBody = SKPhysicsBody(rectangleOf: tennisRacket2.size)
+                tennisRacket2.physicsBody?.isDynamic = false
+                addChild(tennisRacket2)
             }
     
-            func makeLoseZone() {
-                func makeLoseZone() {
+                func makeloseZone() {
                     let loseZone = SKSpriteNode(color: UIColor.brown, size: CGSize(width: frame.width, height: 50))
                     loseZone.position = CGPoint(x: frame.maxX, y: frame.maxY + 25)
                     loseZone.name = "loseZone"
@@ -193,4 +191,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 }
                 
 }
-        }}}
+        }
