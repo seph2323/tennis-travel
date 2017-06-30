@@ -18,25 +18,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     var loseZone = SKSpriteNode()
     var score: Int = 0
    var  numberOfLives: Int = 0
-    override func didMove(to view: SKView)
+    
+         override func didMove(to view: SKView)
     {
         physicsWorld.contactDelegate = self
         
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         
             
-//           createBackground()
-//            makeTennisBall()
-//            makeRacket1()
-//            makeRacket2()
-//            makeNet()
-//            makeGreenRight()
-//            makeGreenLeft()
-//            makeGreenRight2()
-//            makeGreenLeft2()
-//            makeloseZone()
+           createBackground()
+            makeTennisBall()
+            makeRacket1()
+            makeRacket2()
+            makeNet()
+            makeGreenRight()
+            makeGreenLeft()
+            makeGreenRight2()
+            makeGreenLeft2()
+            makeLoseZone()
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -90,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             }
     
             func createBackground() {
-                let tennisCourt = SKTexture(imageNamed: "tennis court")
+                let tennisCourt = SKTexture(imageNamed: "tennis ourt")
                 for i in 0...1 {
                     let tennisCourtBackground = SKSpriteNode(texture: tennisCourt)
                     tennisCourtBackground.zPosition = -1
